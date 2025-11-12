@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - For The Best Queenz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <style>
+        /* Additional admin-specific styles */
+        .admin-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .admin-main {
+            flex: 1;
+            margin-top: 4rem;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .admin-main {
+                margin-left: 16rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-['Poppins']">
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+    
+    <!-- Sidebar will be loaded here -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content area -->
+    <div class="admin-container">
+        <main class="admin-main p-6">
+            <!-- Statistics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total Products -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-pink-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Total Products</p>
+                            <p class="text-3xl font-bold text-gray-900" id="total-products">0</p>
+                            <p class="text-xs text-green-600 mt-1">↗️ +12% from last month</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-pink-100 text-pink-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Categories -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-purple-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Total Categories</p>
+                            <p class="text-3xl font-bold text-gray-900" id="total-categories">0</p>
+                            <p class="text-xs text-blue-600 mt-1">📊 3 active categories</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Orders -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-blue-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Total Orders</p>
+                            <p class="text-3xl font-bold text-gray-900" id="total-orders">0</p>
+                            <p class="text-xs text-orange-600 mt-1" id="pending-orders">⏳ 5 pending orders</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-l-4 border-green-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Revenue</p>
+                            <p class="text-3xl font-bold text-gray-900" id="total-revenue">KSH 0</p>
+                            <p class="text-xs text-green-600 mt-1">+8% from last month</p>
+                        </div>
+                        <div class="p-3 rounded-full bg-green-100 text-green-600">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Overview Chart -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        Sales Overview
+                    </h3>
+                    <div class="space-y-3" id="sales-overview">
+                        <div class="text-sm text-gray-600 py-4 text-center">
+                            Loading sales data...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Top Categories</h3>
+                    <div class="space-y-3" id="top-categories-container">
+                        <div class="text-sm text-gray-600 py-4 text-center">
+                            Loading categories...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity or Charts Placeholder -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Orders</h3>
+                    <div class="space-y-3" id="recent-orders">
+                        <p class="text-gray-600">No recent orders</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <a href="manage_products.html" class="block w-full bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors text-center">
+                            Add New Product
+                        </a>
+                        <a href="manage_categories.html" class="block w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-center">
+                            Add New Category
+                        </a>
+                        <a href="manage_contacts.html" class="block w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center">
+                            View Contacts
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading and Error States -->
+    <div id="loading-state" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl">
+            <div class="flex items-center space-x-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                <span class="text-gray-700">Loading dashboard data...</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="error-state" class="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded hidden z-50">
+        <span class="block sm:inline">Error loading dashboard data. Please try again later.</span>
+    </div>
+    
+    <!-- Load admin components -->
+    <script src="includes/admin-loader.js"></script>
+    <script src="includes/functions.js"></script>
+    
+    <!-- Axios for HTTP requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script>
+    // Initialize the admin interface
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set the page title
+        setPageTitle('Dashboard');
+        
+        // Initialize dashboard with loading state
+        setLoadingState(true);
+        
+        // Load initial data
+        updateDashboard().finally(() => {
+            setLoadingState(false);
+        });
+        
+        // Update data every 30 seconds
+        const dashboardInterval = setInterval(() => {
+            updateDashboard();
+        }, 30000);
+        
+        // Clean up interval on page unload
+        window.addEventListener('beforeunload', () => {
+            clearInterval(dashboardInterval);
+        });
+        
+        // Function to set loading/error states
+        function setLoadingState(isLoading, error = null) {
+            const loadingElement = document.getElementById('loading-state');
+            const errorElement = document.getElementById('error-state');
+            const contentElement = document.getElementById('dashboard-content');
+            
+            if (isLoading) {
+                if (loadingElement) loadingElement.classList.remove('hidden');
+                if (errorElement) errorElement.classList.add('hidden');
+                if (contentElement) contentElement.classList.add('opacity-50', 'pointer-events-none');
+            } else if (error) {
+                if (loadingElement) loadingElement.classList.add('hidden');
+                if (errorElement) {
+                    errorElement.classList.remove('hidden');
+                    errorElement.textContent = `Error: ${error.message || 'Failed to load dashboard data'}`;
+                }
+                if (contentElement) contentElement.classList.add('opacity-50', 'pointer-events-none');
+            } else {
+                if (loadingElement) loadingElement.classList.add('hidden');
+                if (errorElement) errorElement.classList.add('hidden');
+                if (contentElement) contentElement.classList.remove('opacity-50', 'pointer-events-none');
+            }
+        }
+        
+        // Function to handle API errors
+        async function handleApiError(error) {
+            console.error('API Error:', error);
+            setLoadingState(false, error);
+            // You could add more sophisticated error handling here, like showing a toast notification
+            return { products: [], categories: [] };
+        }
+        
+        // Function to fetch data from API with retry logic
+        async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(options.headers || {})
+                    }
+                });
+                
+                if (!response.ok) {
+                    const error = new Error(`HTTP error! status: ${response.status}`);
+                    error.status = response.status;
+                    throw error;
+                }
+                
+                return await response.json();
+            } catch (error) {
+                if (retries === 0) throw error;
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return fetchWithRetry(url, options, retries - 1, delay * 2);
+            }
+        }
+        
+        // Function to fetch and update dashboard data
+        async function updateDashboard() {
+            try {
+                setLoadingState(true);
+
+                // Fetch data in parallel
+                const [products, categories, orders] = await Promise.all([
+                    fetchWithRetry('/api/products').catch(handleApiError),
+                    fetchWithRetry('/api/categories').catch(handleApiError),
+                    fetchWithRetry('/api/orders').catch(handleApiError) // Make sure you have this endpoint
+                ]);
+
+                // Update products count
+                document.getElementById('total-products').textContent = products?.length || 0;
+
+                // Update categories count
+                document.getElementById('total-categories').textContent = categories?.length || 0;
+
+                // Update orders count and pending orders
+                const pendingOrders = orders?.filter(order => order.status === 'pending') || [];
+                document.getElementById('total-orders').textContent = orders?.length || 0;
+                document.getElementById('pending-orders').textContent = `${pendingOrders.length} pending orders`;
+
+                // Calculate and update revenue
+                const totalRevenue = products?.reduce((sum, product) => {
+                    return sum + (parseFloat(product.price) * (parseInt(product.stock) || 0));
+                }, 0) || 0;
+
+                document.getElementById('total-revenue').textContent = `KSH ${totalRevenue.toFixed(2)}`;
+
+                // Update sales overview
+                updateSalesOverview(orders || []);
+
+                // Update top categories
+                updateTopCategories(products || [], categories || []);
+
+            } catch (error) {
+                console.error('Error updating dashboard:', error);
+                handleApiError(error);
+            } finally {
+                setLoadingState(false);
+            }
+        }
+        
+        function updateTopCategories(products, categories) {
+            try {
+                // Count products in each category
+                const categoryCounts = {};
+                products.forEach(product => {
+                    if (product.category) {
+                        categoryCounts[product.category] = (categoryCounts[product.category] || 0) + 1;
+                    }
+                });
+
+                // Convert to array and sort by count
+                const sortedCategories = Object.entries(categoryCounts)
+                    .map(([name, count]) => ({ name, count }))
+                    .sort((a, b) => b.count - a.count);
+
+                const totalProducts = products.length;
+                const container = document.getElementById('top-categories-container');
+
+                if (container) {
+                    if (sortedCategories.length === 0) {
+                        container.innerHTML = '<p class="text-gray-500 text-sm">No category data available</p>';
+                        return;
+                    }
+
+                    container.innerHTML = sortedCategories.slice(0, 5).map(cat => {
+                        const percentage = totalProducts > 0 ? (cat.count / totalProducts) * 100 : 0;
+                        const category = categories.find(c => c.id === cat.name || c.name === cat.name) || { name: cat.name };
+
+                        return `
+                            <div class="mb-4">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-700">${category.name || 'Uncategorized'}</span>
+                                    <span class="font-medium">${percentage.toFixed(1)}%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-pink-500 h-2 rounded-full" style="width: ${percentage}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            } catch (error) {
+                console.error('Error updating top categories:', error);
+            }
+        }
+        
+        function updateSalesOverview(orders) {
+            try {
+                const now = new Date();
+                const currentMonth = now.getMonth();
+                const currentYear = now.getFullYear();
+
+                // Filter orders for current and previous month
+                const currentMonthOrders = orders.filter(order => {
+                    const orderDate = new Date(order.date || order.createdAt);
+                    return orderDate.getMonth() === currentMonth &&
+                           orderDate.getFullYear() === currentYear;
+                });
+
+                const lastMonthOrders = orders.filter(order => {
+                    const orderDate = new Date(order.date || order.createdAt);
+                    const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+                    const year = currentMonth === 0 ? currentYear - 1 : currentYear;
+                    return orderDate.getMonth() === lastMonth &&
+                           orderDate.getFullYear() === year;
+                });
+
+                // Calculate totals
+                const currentMonthTotal = currentMonthOrders.reduce((sum, order) =>
+                    sum + parseFloat(order.total || 0), 0);
+
+                const lastMonthTotal = lastMonthOrders.reduce((sum, order) =>
+                    sum + parseFloat(order.total || 0), 0);
+
+                // Calculate percentage change
+                let percentChange = 0;
+                if (lastMonthTotal > 0) {
+                    percentChange = ((currentMonthTotal - lastMonthTotal) / lastMonthTotal) * 100;
+                } else if (currentMonthTotal > 0) {
+                    percentChange = 100;
+                }
+
+                // Update the UI
+                const overviewElement = document.getElementById('sales-overview');
+                if (overviewElement) {
+                    overviewElement.innerHTML = `
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">This Month</span>
+                            <span class="text-sm font-semibold">KSH ${currentMonthTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: ${Math.min(100, (currentMonthTotal / (lastMonthTotal || 1)) * 100)}%"></div>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">Last Month</span>
+                            <span class="text-sm font-semibold">KSH ${lastMonthTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <div class="text-sm mt-3 ${percentChange >= 0 ? 'text-green-600' : 'text-red-600'}">
+                            ${percentChange >= 0 ? '↑' : '↓'} ${Math.abs(percentChange).toFixed(1)}%
+                            ${percentChange >= 0 ? 'increase' : 'decrease'} from last month
+                        </div>
+                    `;
+                }
+
+                // Update the revenue change indicator
+                const revenueChangeElement = document.querySelector('#total-revenue + .text-xs');
+                if (revenueChangeElement) {
+                    revenueChangeElement.textContent = `${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(1)}% from last month`;
+                    revenueChangeElement.className = `text-xs ${percentChange >= 0 ? 'text-green-600' : 'text-red-600'} mt-1`;
+                }
+
+            } catch (error) {
+                console.error('Error updating sales overview:', error);
+            }
+        }
+        
+        function updateRecentOrders() {
+            // This is a placeholder - in a real app, you would fetch this from your orders API
+            const container = document.getElementById('recent-orders');
+            if (container) {
+                container.innerHTML = `
+                    <div class="text-sm text-gray-600 py-4 text-center">
+                        No recent orders
+                    </div>
+                `;
+            }
+        }
+        
+        // You can add any dashboard-specific JavaScript here
+        console.log('Admin dashboard initialized');
+    });
+    </script>
+    <!-- Load admin components (header and sidebar) -->
+    <script src="includes/admin-loader.js"></script>
+    <script src="assets/js/admin.js"></script>
+    <script src="includes/functions.js"></script>
+</body>
+</html>

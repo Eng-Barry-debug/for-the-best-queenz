@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "customerName": "Jane Doe",
+    "customerEmail": "jane@example.com",
+    "items": [
+      {
+        "productId": 1,
+        "name": "Lipstick",
+        "quantity": 2,
+        "price": 15.99
+      }
+    ],
+    "total": 31.98,
+    "status": "completed",
+    "createdAt": "2023-01-15T10:30:00.000Z",
+    "updatedAt": "2023-01-15T10:30:00.000Z"
+  },
+  {
+    "id": 2,
+    "customerName": "Alice Smith",
+    "customerEmail": "alice@example.com",
+    "items": [
+      {
+        "productId": 2,
+        "name": "Hair Brush",
+        "quantity": 1,
+        "price": 12.99
+      }
+    ],
+    "total": 12.99,
+    "status": "pending",
+    "createdAt": "2023-01-20T14:45:00.000Z",
+    "updatedAt": "2023-01-20T14:45:00.000Z"
+  },
+  {
+    "id": 3,
+    "customerName": "Bob Johnson",
+    "customerEmail": "bob@example.com",
+    "items": [
+      {
+        "productId": 1,
+        "name": "Lipstick",
+        "quantity": 1,
+        "price": 15.99
+      },
+      {
+        "productId": 2,
+        "name": "Hair Brush",
+        "quantity": 1,
+        "price": 12.99
+      }
+    ],
+    "total": 28.98,
+    "status": "completed",
+    "createdAt": "2023-01-25T09:15:00.000Z",
+    "updatedAt": "2023-01-25T09:15:00.000Z"
+  }
+]

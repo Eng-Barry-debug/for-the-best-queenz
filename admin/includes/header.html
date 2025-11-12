@@ -1,0 +1,39 @@
+<!-- Admin Header -->
+<header class="bg-white shadow-sm border-b border-gray-200 px-4 py-3 md:px-6 md:py-4 flex justify-between items-center">
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+
+    <!-- Page title (will be set dynamically) -->
+    <div class="flex-1 md:flex-initial">
+        <h1 id="page-title" class="text-xl md:text-2xl font-semibold text-gray-800">Dashboard</h1>
+    </div>
+
+    <!-- User profile and logout -->
+    <div class="flex items-center space-x-4">
+        <!-- User profile -->
+        <div class="flex items-center space-x-3">
+            <div class="hidden md:block text-right">
+                <p class="text-sm font-medium text-gray-900">Admin User</p>
+                <p class="text-xs text-gray-500">Administrator</p>
+            </div>
+            <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold shadow-md">
+                A
+            </div>
+        </div>
+
+        <!-- Logout button -->
+        <a href="login.html" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center space-x-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+            <span class="hidden md:inline">Logout</span>
+        </a>
+    </div>
+</header>
+
+<!-- Mobile sidebar overlay -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden hidden" onclick="closeSidebar()"></div>

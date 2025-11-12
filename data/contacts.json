@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "message": "Hello, I would like to inquire about your products.",
+    "createdAt": "2023-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Barrack",
+    "email": "oluochbarrackonyango@gmail.com",
+    "message": "chech test",
+    "createdAt": "2025-11-12T17:22:14.485Z"
+  }
+]

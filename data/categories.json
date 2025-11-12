@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Cosmetics",
+    "slug": "cosmetics",
+    "description": "Beauty and makeup products",
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2023-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Hair Tools",
+    "slug": "hair-tools",
+    "description": "Professional hair styling tools",
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2023-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Skincare",
+    "slug": "skincare",
+    "description": "Face and body care products",
+    "createdAt": "2023-01-01T00:00:00.000Z",
+    "updatedAt": "2023-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Professional",
+    "slug": "professional",
+    "description": "wertyuio",
+    "createdAt": "2025-11-12T16:58:52.566Z",
+    "updatedAt": "2025-11-12T16:58:52.566Z"
+  }
+]

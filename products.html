@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - For The Best_Queenz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Include the JavaScript for handling the mobile menu -->
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-['Poppins']">
+    <!-- Include header component -->
+    <div id="header">
+        <!-- Header will be loaded here by JavaScript -->
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-purple-600 via-pink-600 to-indigo-700 text-white py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        <div class="container mx-auto px-4 text-center relative z-10 animate-fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">Our Products</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed">Discover our curated collection of premium beauty products, cosmetics, and hair tools designed to enhance your natural glow and boost your confidence.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#products-grid" class="bg-gradient-to-r from-yellow-400 to-pink-500 text-white px-8 py-4 rounded-full font-semibold hover:from-yellow-500 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg">Shop Now</a>
+                <a href="about.html" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transform hover:scale-105 transition-all duration-300">Learn More</a>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" class="w-full h-12 md:h-20">
+                <path fill="#f9fafb" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,48C960,53,1056,75,1152,80C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <main class="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div class="container mx-auto px-4">
+            <!-- Filter Section -->
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Find Your Perfect Products</h2>
+                <div id="filter-buttons" class="flex flex-wrap justify-center gap-4 mb-8">
+                    <!-- Filter buttons will be loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="text-center py-12">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+                <p class="text-gray-600">Loading products...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-12">
+                <svg class="mx-auto h-24 w-24 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+                <p class="text-gray-600">Try adjusting your filters or check back later.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include footer component -->
+    <div id="footer">
+        <!-- Footer will be loaded here by JavaScript -->
+    </div>
+
+    <!-- Load header and footer components -->
+    <script>
+        // Function to load HTML components
+        async function loadComponent(componentId, filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${filePath}: ${response.status}`);
+                }
+                const html = await response.text();
+                const element = document.getElementById(componentId);
+                if (element) {
+                    element.outerHTML = html;
+                }
+            } catch (error) {
+                console.error(`Error loading ${filePath}:`, error);
+            }
+        }
+
+        // Load components when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComponent('header', 'components/header.html');
+            loadComponent('footer', 'components/footer.html');
+        });
+    </script>
+
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
