@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 // Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, 'public', 'uploads');
+const uploadsDir = path.join(__dirname, 'uploads');
 fs.mkdir(uploadsDir, { recursive: true });
 
 // Configure multer for file uploads
@@ -51,11 +51,11 @@ app.use((req, res, next) => {
 });
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // Explicitly serve the CSS file
 app.get('/css/style.css', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'css', 'style.css'), {
+    res.sendFile(path.join(__dirname, 'css', 'style.css'), {
         headers: {
             'Content-Type': 'text/css'
         }
@@ -64,7 +64,7 @@ app.get('/css/style.css', (req, res) => {
 
 // Explicitly serve the main.js file
 app.get('/js/main.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'js', 'main.js'), {
+    res.sendFile(path.join(__dirname, 'js', 'main.js'), {
         headers: {
             'Content-Type': 'application/javascript'
         }
@@ -73,7 +73,7 @@ app.get('/js/main.js', (req, res) => {
 
 // Serve component files
 app.get('/components/:file', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'components', req.params.file));
+    res.sendFile(path.join(__dirname, 'components', req.params.file));
 });
 
 // Serve uploads
