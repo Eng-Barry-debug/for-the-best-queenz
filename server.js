@@ -3,12 +3,13 @@ const path = require('path');
 const cors = require('cors');
 const multer = require('multer');
 const fs = require('fs').promises;
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 // Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, 'uploads');
+const uploadsDir = path.join(__dirname, 'public', 'uploads');
 fs.mkdir(uploadsDir, { recursive: true });
 
 // Configure multer for file uploads
@@ -44,45 +45,9 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Log all requests for debugging
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-});
-
 // Serve static files
-app.use(express.static(__dirname));
-
-// Explicitly serve the CSS file
-app.get('/css/style.css', (req, res) => {
-    res.sendFile(path.join(__dirname, 'css', 'style.css'), {
-        headers: {
-            'Content-Type': 'text/css'
-        }
-    });
-});
-
-// Explicitly serve the main.js file
-app.get('/js/main.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'js', 'main.js'), {
-        headers: {
-            'Content-Type': 'application/javascript'
-        }
-    });
-});
-
-// Serve component files
-app.get('/components/:file', (req, res) => {
-    res.sendFile(path.join(__dirname, 'components', req.params.file));
-});
-
-// Serve uploads
+app.use(express.static(path.join(__dirname)));
 app.use('/uploads', express.static(uploadsDir));
-
-// Handle SPA routing - return index.html for all other routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 // API routes
 app.all('/api/products/:id?', require('./api/products.js'));
