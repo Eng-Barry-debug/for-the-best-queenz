@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For The Best_Queenz - Online Cosmetic & Beauty Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -111,23 +111,32 @@
             });
         }
 
-        // Load components when the page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Use absolute paths for Vercel
-            loadComponent('header', 'components/header.html');
-            loadComponent('footer', 'components/footer.html');
-            
-            // Initialize any dynamic content in the main page
-            initializeDynamicContent();
-            
-            // Add fade-in animation to main content
-            const mainContent = document.querySelector('main');
-            if (mainContent) {
-                mainContent.classList.add('animate-fade-in');
+        // Function to load components
+        async function loadComponents() {
+            try {
+                // Load header and footer
+                await Promise.all([
+                    loadComponent('header', './components/header.html'),
+                    loadComponent('footer', './components/footer.html')
+                ]);
+                
+                // Initialize dynamic content after components are loaded
+                initializeDynamicContent();
+                
+                // Add fade-in animation to main content
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    mainContent.classList.add('animate-fade-in');
+                }
+            } catch (error) {
+                console.error('Error loading components:', error);
             }
-        });
+        }
+
+        // Load components when the page loads
+        document.addEventListener('DOMContentLoaded', loadComponents);
     </script>
 
-    <script src="/js/main.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>

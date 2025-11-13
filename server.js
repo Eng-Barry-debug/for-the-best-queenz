@@ -44,9 +44,19 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Serve static files
+// Serve static files from the root directory
 app.use(express.static(path.join(__dirname)));
+
+// Serve static files from specific directories
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/components', express.static(path.join(__dirname, 'components')));
 app.use('/uploads', express.static(uploadsDir));
+
+// Handle SPA routing - return index.html for all other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // API routes
 app.all('/api/products/:id?', require('./api/products.js'));
