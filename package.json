@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "For The Best Queenz - E-commerce Website",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/input.css -o ./css/style.css",
-    "build": "npm run build:css",
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/style.css --minify",
+    "build": "npm run build:css && node copy-assets.js",
     "start": "node server.js",
-    "dev": "node server.js",
-    "vercel-build": "npm run build"
+    "dev": "concurrently \"npm run build:css -- --watch\" \"node server.js\"",
+    "vercel-build": "npm install && npm run build"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -16,6 +19,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
+    "concurrently": "^9.2.1",
+    "fs-extra": "^11.3.2",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.0"
   }
