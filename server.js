@@ -54,6 +54,10 @@ app.all('/api/categories/:id?', require('./api/categories.js'));
 app.all('/api/contacts/:id?', require('./api/contacts.js'));
 app.all('/api/orders/:id?', require('./api/orders.js'));
 
+// Catch-all handler: send back index.html for any non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
