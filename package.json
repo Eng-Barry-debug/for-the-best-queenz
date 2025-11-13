@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "For The Best Queenz - E-commerce Website",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/input.css -o ./css/style.css --watch",
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/style.css",
+    "build": "npm run build:css",
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "cors": "^2.8.5",
