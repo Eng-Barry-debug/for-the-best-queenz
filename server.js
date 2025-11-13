@@ -3,7 +3,6 @@ const path = require('path');
 const cors = require('cors');
 const multer = require('multer');
 const fs = require('fs').promises;
-const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
