@@ -1,34 +1,37 @@
 [
   {
-    "id": 2,
-    "name": "Hair Brush",
+    "id": "2",
+    "name": "ah",
     "category": "Hair Tools",
-    "price": 12.99,
-    "description": "Professional hair brush",
-    "image": "/uploads/product-1762970350215-714529912.jpeg",
-    "stock": 30,
+    "price": "300",
+    "description": "for hair",
+    "image": "/uploads/product-1763019836416-985726727.jpg",
+    "stock": "12",
+    "featured": true,
     "createdAt": "2023-01-01T00:00:00.000Z",
-    "updatedAt": "2025-11-12T17:59:10.231Z"
+    "updatedAt": "2025-11-14T05:09:43.920Z"
   },
   {
-    "id": 3,
+    "id": "3",
     "name": "Hair",
     "category": "Hair Tools",
-    "price": 200,
+    "price": "200",
     "description": "ththth",
     "image": "/uploads/product-1762970340176-639267576.jpeg",
     "createdAt": "2025-11-12T16:43:23.754Z",
-    "updatedAt": "2025-11-12T17:59:00.183Z",
-    "stock": 200
+    "updatedAt": "2025-11-14T05:13:44.167Z",
+    "stock": "200",
+    "featured": true
   },
   {
-    "id": 4,
+    "id": "4",
     "name": "Lip Gloss",
     "category": "Cosmetics",
     "price": 600,
     "description": "Lips care",
     "image": "/uploads/product-1762970297943-262128274.jpeg",
     "stock": 13,
+    "featured": false,
     "createdAt": "2025-11-12T17:58:17.950Z",
     "updatedAt": "2025-11-12T17:58:17.950Z"
   }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - For The Best_Queenz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-['Poppins']">
+    <!-- Header -->
+    <div id="header">
+        <!-- Header will be loaded here by JavaScript -->
+    </div>
+
+    <!-- Main Content -->
+    <main class="py-12 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-12">Your Shopping Cart</h1>
+            
+            <!-- Cart Items -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <!-- Cart Items List -->
+                <div id="cart-items" class="divide-y divide-gray-200">
+                    <!-- Items will be loaded here dynamically -->
+                    <div class="p-8 text-center">
+                        <svg class="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <h3 class="mt-4 text-lg font-medium text-gray-900">Your cart is empty</h3>
+                        <p class="mt-1 text-gray-500">Start shopping to add items to your cart</p>
+                        <div class="mt-6">
+                            <a href="products.html" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                                Continue Shopping
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="border-t border-gray-200 px-6 py-6 bg-gray-50">
+                    <div class="flex justify-between text-base font-medium text-gray-900 mb-4">
+                        <p>Subtotal</p>
+                        <p id="cart-subtotal">KSH 0.00</p>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-6">Shipping and taxes calculated at checkout.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button id="update-cart" class="flex-1 bg-gray-100 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                            Update Cart
+                        </button>
+                        <button id="checkout-button" class="flex-1 bg-pink-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-sm font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkout Form (initially hidden) -->
+            <div id="checkout-form" class="hidden bg-white rounded-xl shadow-md overflow-hidden p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-6">Delivery Information</h2>
+                <form id="delivery-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email (Optional)</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+                    </div>
+                    <div>
+                        <label for="address" class="block text-sm font-medium text-gray-700">Delivery Address</label>
+                        <textarea id="address" name="address" rows="3" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-pink-500 focus:border-pink-500"></textarea>
+                    </div>
+                    <div>
+                        <label for="notes" class="block text-sm font-medium text-gray-700">Special Instructions (Optional)</label>
+                        <textarea id="notes" name="notes" rows="2" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-pink-500 focus:border-pink-500" placeholder="Any special instructions for delivery..."></textarea>
+                    </div>
+                    <div class="pt-4">
+                        <button type="submit" class="w-full bg-pink-600 border border-transparent rounded-md py-3 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                            Send Order via WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer">
+        <!-- Footer will be loaded here by JavaScript -->
+    </div>
+
+    <!-- Load components -->
+    <script>
+        // Function to load components
+        function loadComponent(componentId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById(componentId).outerHTML = html;
+                })
+                .catch(error => {
+                    console.error(`Error loading ${componentId}:`, error);
+                });
+        }
+
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComponent('header', 'components/header.html');
+            loadComponent('footer', 'components/footer.html');
+        });
+    </script>
+
+    <!-- Cart Scripts -->
+    <script src="js/cart.js"></script>
+    <script src="js/cart-page.js"></script>
+</body>
+</html>

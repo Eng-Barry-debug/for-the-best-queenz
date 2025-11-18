@@ -159,6 +159,50 @@ function createErrorElement() {
     return errorElement;
 }
 
+// Function to handle add to cart
+function handleAddToCart(product) {
+    if (window.cart) {
+        window.cart.addItem(product);
+    } else {
+        console.error('Cart not initialized');
+    }
+}
+
+// Function to create product card HTML
+function createProductCard(product) {
+    return `
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl">
+            <div class="relative overflow-hidden group">
+                <img src="${product.image || 'https://via.placeholder.com/300x300'}" 
+                     alt="${product.name}" 
+                     class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <button onclick="handleAddToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})" 
+                            class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-1">${product.name}</h3>
+                <p class="text-gray-600 text-sm mb-3">${product.category || 'Beauty'}</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-bold text-purple-600">KSH ${product.price?.toFixed(2) || '0.00'}</span>
+                    <button onclick="handleAddToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})" 
+                            class="md:hidden bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-colors">
+                        Add
+                    </button>
+                </div>
+                ${product.featured ? `
+                    <div class="absolute top-3 right-3 bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        Featured
+                    </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
 // Function to render products
 function renderProducts(containerId, productList = products) {
     const container = document.getElementById(containerId);
@@ -197,6 +241,36 @@ function renderProducts(containerId, productList = products) {
         return;
     }
 
+    // Function to handle add to cart
+    const handleAddToCart = (product) => {
+        if (window.cart) {
+            window.cart.addItem({
+                id: product.id || Date.now(),
+                name: product.name || 'Unnamed Product',
+                price: parseFloat(product.price) || 0,
+                image: product.image || 'https://placehold.co/300x200/ffffff/000000.png?text=No+Image',
+                quantity: 1
+            });
+            
+            // Show success message
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+            notification.textContent = `${product.name || 'Item'} added to cart!`;
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        } else {
+            console.error('Cart not initialized');
+        }
+    };
+
+    // Make handleAddToCart available globally
+    window.handleAddToCart = handleAddToCart;
+
     // Render products
     container.innerHTML = productList.map(product => `
         <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 group">
@@ -207,34 +281,47 @@ function renderProducts(containerId, productList = products) {
                     class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-300"
                     onerror="this.src='https://placehold.co/300x200/ffffff/000000.png?text=No+Image'"
                 >
-                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <button 
+                        onclick="handleAddToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})"
+                        class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
             </div>
             <div class="p-6">
                 <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-purple-600 transition-colors">${product.name || 'Unnamed Product'}</h3>
-                <p class="text-gray-600 mb-4 leading-relaxed">${product.description || 'No description available.'}</p>
+                <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">${product.description || 'No description available.'}</p>
                 <div class="flex justify-between items-center mb-4">
                     <p class="text-2xl font-bold text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text">
                         KSH ${(parseFloat(product.price) || 0).toFixed(2)}
                     </p>
                     ${product.category ? `<span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">${product.category}</span>` : ''}
                 </div>
-                <a 
-                    href="https://wa.me/1234567890?text=Hello, I want to order ${encodeURIComponent(product.name || 'product')}" 
-                    target="_blank" 
-                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 block text-center shadow-lg"
-                >
-                    Order Now
-                </a>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button 
+                        onclick="handleAddToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})"
+                        class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 text-center shadow-lg sm:hidden"
+                    >
+                        Add to Cart
+                    </button>
+                    <a 
+                        href="https://wa.me/1234567890?text=Hello, I want to order ${encodeURIComponent(product.name || 'product')}" 
+                        target="_blank" 
+                        class="flex-1 bg-white border-2 border-purple-600 text-purple-600 py-3 px-4 rounded-lg font-semibold hover:bg-purple-50 transform hover:scale-105 transition-all duration-300 text-center shadow-lg"
+                    >
+                        Order Now
+                    </a>
+                </div>
             </div>
         </div>
     `).join('');
 }
 
-// Function to render featured products (first 3)
-async function renderFeaturedProducts() {
-    const products = await fetchProducts();
-    renderProducts('featured-products', products.slice(0, 3));
-}
+
+// Make handleAddToCart available globally
+window.handleAddToCart = handleAddToCart;
 
 // Initialize products on page load
 document.addEventListener('DOMContentLoaded', async function() {
@@ -255,11 +342,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     await fetchCategories();
     createFilterButtons();
 
-    // Load products
-    if (featuredContainer) {
-        await renderFeaturedProducts();
-    }
 
+    // Load products
     if (productsContainer) {
         const products = await fetchProducts();
         renderProducts('products-grid', products);
@@ -273,26 +357,23 @@ document.addEventListener('DOMContentLoaded', async function() {
 function setupFilters() {
     const categoryFilter = document.getElementById('category');
     const sortSelect = document.getElementById('sort');
-    
+
     if (categoryFilter) {
-        // Populate categories from products
-        fetchProducts().then(products => {
-            const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
-            const categorySelect = document.getElementById('category');
-            
-            if (categorySelect) {
-                categories.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category;
-                    option.textContent = category;
-                    categorySelect.appendChild(option);
-                });
-            }
-        });
-        
+        // Populate categories from the backend categories API
+        const categorySelect = document.getElementById('category');
+
+        if (categorySelect) {
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.name;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        }
+
         categoryFilter.addEventListener('change', filterProducts);
     }
-    
+
     if (sortSelect) {
         sortSelect.addEventListener('change', sortProducts);
     }
@@ -320,6 +401,9 @@ function sortProducts() {
     let sortedProducts = [...products];
     
     switch (sortValue) {
+        case 'featured':
+            sortedProducts.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            break;
         case 'price-low':
             sortedProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
             break;
@@ -333,7 +417,7 @@ function sortProducts() {
             sortedProducts.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
             break;
         default:
-            // Default sorting (featured or by ID)
+            // Default sorting (by ID)
             break;
     }
     

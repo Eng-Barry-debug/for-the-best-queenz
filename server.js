@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -5,12 +6,21 @@ const multer = require('multer');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
 
+// Validate required environment variables
+const requiredEnvVars = ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'S3_BUCKET_NAME'];
+const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+
+if (missingVars.length > 0 && process.env.NODE_ENV === 'production') {
+    console.error('Missing required environment variables:', missingVars.join(', '));
+    process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Create uploads directory if it doesn't exist
+// Create uploads directory if it doesn't exist (for local development)
 const uploadsDir = path.join(__dirname, 'public', 'uploads');
-fs.mkdir(uploadsDir, { recursive: true });
+fs.mkdir(uploadsDir, { recursive: true }).catch(console.error);
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({

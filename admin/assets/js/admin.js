@@ -154,7 +154,7 @@ function displayProducts(products) {
                 </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                $${product.price || '0.00'}
+                KSH ${product.price || '0.00'}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <button onclick="editProduct(${product.id})" class="text-indigo-600 hover:text-indigo-900 mr-3">

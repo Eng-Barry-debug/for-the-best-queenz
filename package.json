@@ -5,12 +5,19 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./css/style.css --watch",
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "cleanup:orphans": "node scripts/cleanupOrphanedFiles.js",
+    "cleanup:schedule": "node scripts/scheduleCleanup.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.931.0",
+    "@aws-sdk/s3-request-presigner": "^3.931.0",
+    "aws-sdk": "^2.1692.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
     "uuid": "^13.0.0"
   },
   "devDependencies": {

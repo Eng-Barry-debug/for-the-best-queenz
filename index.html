@@ -30,28 +30,90 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="bg-gradient-to-br from-pink-500 via-purple-600 to-indigo-700 text-white py-24 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-            <div class="container mx-auto px-4 text-center relative z-10 animate-fade-in">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">Welcome to For The Best_Queenz</h1>
-                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed">Discover the finest cosmetics, beauty gadgets, and hair tools curated for your perfect look. Elevate your beauty routine with premium products.</p>
-                <div class="space-x-6">
-                    <a href="products.html" class="bg-gradient-to-r from-yellow-400 to-pink-500 text-white px-8 py-4 rounded-full font-semibold hover:from-yellow-500 hover:to-pink-600 transform hover:scale-105 transition-all duration-300 shadow-lg">Shop Now</a>
-                    <a href="contact.html" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transform hover:scale-105 transition-all duration-300">Contact Us</a>
+        <section class="relative bg-gradient-to-r from-pink-50 to-purple-50 overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute inset-0 bg-[url('https://img.freepik.com/free-vector/watercolor-stains-abstract-background_23-2149107181.jpg')] opacity-10"></div>
+            <div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-pink-200 to-transparent opacity-30"></div>
+            
+            <div class="container mx-auto px-4 py-20 md:py-32 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Column - Text Content -->
+                    <div class="text-center lg:text-left">
+                        <span class="inline-block bg-pink-100 text-pink-700 text-sm font-semibold px-4 py-1 rounded-full mb-4">New Collection 2025</span>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                            <span class="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Beauty</span>
+                            <br>Redefined for You
+                        </h1>
+                        <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0">
+                            Discover the perfect blend of quality and elegance. Our premium cosmetics and beauty products are crafted to enhance your natural beauty.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="products.html" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                                Shop Now
+                            </a>
+                            <a href="#featured" class="bg-white hover:bg-gray-100 text-gray-800 font-medium px-8 py-4 rounded-full border border-gray-200 transition-all duration-300 transform hover:scale-105">
+                                Explore More
+                            </a>
+                        </div>
+                        <div class="mt-10 flex items-center justify-center lg:justify-start space-x-8">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-pink-600">500+</div>
+                                <div class="text-sm text-gray-500">Happy Clients</div>
+                            </div>
+                            <div class="h-12 w-px bg-gray-200"></div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-pink-600">100%</div>
+                                <div class="text-sm text-gray-500">Authentic Products</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Image -->
+                    <div class="relative">
+                        <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Premium Beauty Products" 
+                                 class="w-full h-auto object-cover">
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-pink-200 rounded-full opacity-30"></div>
+                        <div class="absolute -top-6 -right-6 w-40 h-40 bg-purple-200 rounded-full opacity-30"></div>
+                    </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
         </section>
 
-        <!-- Featured Products Preview -->
-        <section class="py-20 bg-white">
+        <!-- Featured Products -->
+        <section id="featured" class="py-20 bg-gradient-to-b from-white to-pink-50">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Featured Products</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="featured-products">
-                    <!-- Products will be loaded dynamically -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="inline-block text-pink-600 font-semibold tracking-wider mb-4">OUR COLLECTION</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Featured <span class="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Products</span></h2>
+                    <p class="text-lg text-gray-600">Discover our handpicked selection of premium beauty essentials</p>
                 </div>
-                <div class="text-center mt-12">
-                    <a href="products.html" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">View All Products</a>
+                
+                <!-- Product Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16" id="featured-products-grid">
+                    <!-- Loading State -->
+                    <div class="col-span-4 text-center py-12">
+                        <div class="animate-pulse flex justify-center mb-4">
+                            <div class="h-12 w-12 bg-pink-200 rounded-full flex items-center justify-center">
+                                <svg class="h-6 w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">Loading featured products...</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="products.html" class="inline-flex items-center text-pink-600 font-semibold hover:text-pink-700 transition-colors duration-300 group">
+                        View All Products
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
@@ -89,5 +151,7 @@
     </script>
 
     <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/featured-products.js"></script>
 </body>
 </html>
