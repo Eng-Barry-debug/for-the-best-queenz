@@ -2,13 +2,14 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "server.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": [
-          "data/**",
-          "public/uploads/**"
-        ]
+        "includeFiles": ["data/**", "public/**"]
       }
     },
     {
@@ -18,14 +19,6 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  },
-  "env": {
-    "NODE_ENV": "production"
-  }
+    { "src": "/(.*)", "dest": "/server.js" }
+  ]
 }
