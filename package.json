@@ -4,7 +4,7 @@
   "description": "For The Best Queenz - E-commerce Website",
   "scripts": {
     "build:css": "npx tailwindcss -i ./src/input.css -o ./css/style.css --minify",
-    "build": "npm run build:css && node copy-assets.js",
+    "build": "npm run build:css",
     "vercel-build": "npm install && npm run build",
     "start": "node server.js",
     "dev": "node server.js",
