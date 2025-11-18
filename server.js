@@ -6,6 +6,10 @@ const multer = require('multer');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
 
+// For serverless environments
+const isProduction = process.env.NODE_ENV === 'production';
+const isVercel = process.env.VERCEL === '1';
+
 // Validate required environment variables
 const requiredEnvVars = ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'S3_BUCKET_NAME'];
 const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
@@ -18,9 +22,43 @@ if (missingVars.length > 0 && process.env.NODE_ENV === 'production') {
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Create uploads directory if it doesn't exist (for local development)
+// Create necessary directories if they don't exist
+const initDirectories = async () => {
+    try {
+        const dirs = [
+            path.join(__dirname, 'public', 'uploads'),
+            path.join(__dirname, 'data')
+        ];
+        
+        for (const dir of dirs) {
+            await fs.mkdir(dir, { recursive: true });
+        }
+        
+        // Initialize data files if they don't exist
+        const dataFiles = [
+            { file: 'products.json', content: [] },
+            { file: 'categories.json', content: [] },
+            { file: 'orders.json', content: [] },
+            { file: 'contacts.json', content: [] }
+        ];
+        
+        for (const { file, content } of dataFiles) {
+            const filePath = path.join(__dirname, 'data', file);
+            try {
+                await fs.access(filePath);
+            } catch (e) {
+                await fs.writeFile(filePath, JSON.stringify(content, null, 2));
+            }
+        }
+    } catch (error) {
+        console.error('Error initializing directories:', error);
+    }
+};
+
+// Initialize directories and data files
+initDirectories().catch(console.error);
+
 const uploadsDir = path.join(__dirname, 'public', 'uploads');
-fs.mkdir(uploadsDir, { recursive: true }).catch(console.error);
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -59,6 +97,11 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.static(path.join(__dirname)));
 app.use('/uploads', express.static(uploadsDir));
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok', environment: process.env.NODE_ENV || 'development' });
+});
+
 // API routes
 app.all('/api/products/:id?', require('./api/products.js'));
 app.all('/api/categories/:id?', require('./api/categories.js'));
@@ -70,6 +113,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Start server only if not in a serverless environment
+if (!isVercel) {
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
+// Export the Express API for Vercel
+module.exports = app;
