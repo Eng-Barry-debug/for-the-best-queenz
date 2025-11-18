@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid').v4;
 const fileStorage = require('../services/fileStorage');
 
 // Path to the products JSON file

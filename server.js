@@ -4,7 +4,8 @@ const path = require('path');
 const cors = require('cors');
 const multer = require('multer');
 const fs = require('fs').promises;
-const { v4: uuidv4 } = require('uuid');
+// Use dynamic import for uuid v4
+const { v4: uuidv4 } = require('uuid').v4;
 
 // For serverless environments
 const isProduction = process.env.NODE_ENV === 'production';
