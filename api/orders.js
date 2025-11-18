@@ -1,7 +1,11 @@
-const fs = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = async (req, res) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default async function ordersRouter(req, res) {
     const { id } = req.params;
 
     // Handle different HTTP methods
@@ -29,7 +33,7 @@ module.exports = async (req, res) => {
 
 async function getOrders(req, res) {
     try {
-        const dataPath = path.join(process.cwd(), 'data', 'orders.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'orders.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const orders = JSON.parse(data);
 
@@ -43,7 +47,7 @@ async function getOrders(req, res) {
 async function getOrder(req, res) {
     try {
         const { id } = req.params;
-        const dataPath = path.join(process.cwd(), 'data', 'orders.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'orders.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const orders = JSON.parse(data);
 
@@ -70,7 +74,7 @@ async function addOrder(req, res) {
         }
 
         // Read current orders
-        const dataPath = path.join(process.cwd(), 'data', 'orders.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'orders.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const orders = JSON.parse(data);
 
@@ -117,7 +121,7 @@ async function updateOrder(req, res) {
         const updatedData = req.body;
 
         // Read current orders
-        const dataPath = path.join(process.cwd(), 'data', 'orders.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'orders.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const orders = JSON.parse(data);
 
@@ -155,7 +159,7 @@ async function deleteOrder(req, res) {
         const { id } = req.params;
 
         // Read the current orders data
-        const dataPath = path.join(process.cwd(), 'data', 'orders.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'orders.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const orders = JSON.parse(data);
 

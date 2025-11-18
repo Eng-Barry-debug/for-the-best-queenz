@@ -1,7 +1,11 @@
-const fs = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = async (req, res) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default async function contactsRouter(req, res) {
     const { id } = req.params;
 
     // Handle different HTTP methods
@@ -26,7 +30,7 @@ module.exports = async (req, res) => {
 
 async function getContacts(req, res) {
     try {
-        const dataPath = path.join(process.cwd(), 'data', 'contacts.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'contacts.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const contacts = JSON.parse(data);
 
@@ -40,7 +44,7 @@ async function getContacts(req, res) {
 async function getContact(req, res) {
     try {
         const { id } = req.params;
-        const dataPath = path.join(process.cwd(), 'data', 'contacts.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'contacts.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const contacts = JSON.parse(data);
 
@@ -67,7 +71,7 @@ async function addContact(req, res) {
         }
 
         // Read current contacts
-        const dataPath = path.join(process.cwd(), 'data', 'contacts.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'contacts.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const contacts = JSON.parse(data);
 
@@ -105,7 +109,7 @@ async function deleteContact(req, res) {
         const { id } = req.params;
 
         // Read the current contacts data
-        const dataPath = path.join(process.cwd(), 'data', 'contacts.json');
+        const dataPath = path.join(__dirname, '..', 'data', 'contacts.json');
         const data = await fs.readFile(dataPath, 'utf8');
         const contacts = JSON.parse(data);
 
