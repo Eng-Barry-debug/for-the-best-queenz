@@ -1,8 +1,8 @@
-const fs = require('fs').promises;
-const path = require('path');
-const multer = require('multer');
-const { v4: uuidv4 } = require('uuid').v4;
-const fileStorage = require('../services/fileStorage');
+import { promises as fs } from 'fs';
+import path from 'path';
+import multer from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+import fileStorage from '../services/fileStorage.js';
 
 // Path to the products JSON file
 const PRODUCTS_FILE = path.join(__dirname, '..', 'data', 'products.json');

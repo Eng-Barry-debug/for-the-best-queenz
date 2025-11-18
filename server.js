@@ -1,11 +1,10 @@
-require('dotenv').config();
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
-const multer = require('multer');
-const fs = require('fs').promises;
-// Use dynamic import for uuid v4
-const { v4: uuidv4 } = require('uuid').v4;
+import 'dotenv/config';
+import express from 'express';
+import path from 'path';
+import cors from 'cors';
+import multer from 'multer';
+import { promises as fs } from 'fs';
+import { v4 as uuidv4 } from 'uuid';
 
 // For serverless environments
 const isProduction = process.env.NODE_ENV === 'production';

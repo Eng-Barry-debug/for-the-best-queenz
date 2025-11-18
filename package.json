@@ -1,6 +1,7 @@
 {
   "name": "for-the-best-queenz",
   "version": "1.0.0",
+  "type": "module",
   "description": "For The Best Queenz - E-commerce Website",
   "scripts": {
     "build:css": "npx tailwindcss -i ./src/input.css -o ./css/style.css --minify",
@@ -20,7 +21,7 @@
     "express": "^4.18.2",
     "multer": "^2.0.2",
     "node-cron": "^4.2.1",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
