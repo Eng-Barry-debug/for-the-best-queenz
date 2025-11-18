@@ -2,7 +2,7 @@ import { S3Client, PutObjectCommand, DeleteObjectCommand, ListObjectsV2Command }
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import path from 'path';
 import { promises as fs } from 'fs';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 
 class FileStorage {
     constructor() {
@@ -20,7 +20,7 @@ class FileStorage {
     async uploadFile(file, folder = '') {
         try {
             const fileExt = path.extname(file.originalname).toLowerCase();
-            const fileName = `${this.uploadFolder}${folder ? '/' + folder : ''}/${uuidv4()}${fileExt}`;
+            const fileName = `${this.uploadFolder}${folder ? '/' + folder : ''}/${randomUUID()}${fileExt}`;
             
             const command = new PutObjectCommand({
                 Bucket: this.bucketName,
