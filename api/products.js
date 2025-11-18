@@ -119,7 +119,7 @@ const toggleFeatured = async (req, res) => {
     }
 };
 
-module.exports = async (req, res) => {
+export default async function productsRouter(req, res) {
     console.log(`Received ${req.method} request to ${req.url}`);
     
     try {
@@ -166,32 +166,56 @@ module.exports = async (req, res) => {
                     } catch (error) {
                         console.error('Error in JSON PUT handler:', error);
                         res.status(500).json({ error: 'Internal server error' });
-                    }
-                });
-            } else {
-                // Handle file upload for product update
                 handleFileUpload(req, res, async () => {
                     try {
-                        console.log('Processing form-data PUT request with data:', req.body);
+                        console.log('Processing POST request with data:', req.body);
                         console.log('Uploaded file:', req.file);
-                        await updateProduct(req, res);
+                        await addProduct(req, res);
                     } catch (error) {
-                        console.error('Error in form-data PUT handler:', error);
+                        console.error('Error in POST handler:', error);
                         res.status(500).json({ error: 'Internal server error' });
                     }
                 });
-            }
-        } else if (req.method === 'DELETE') {
-            // Delete product
-            await deleteProduct(req, res);
-        } else {
-            res.status(405).json({ error: 'Method not allowed' });
+                break;
+            case 'PUT':
+                // Check if this is a JSON request or form data
+                if (req.headers['content-type'] && req.headers['content-type'].startsWith('application/json')) {
+                    // Handle JSON request directly
+                    jsonParser(req, res, async () => {
+                        try {
+                            console.log('Processing JSON PUT request with data:', req.body);
+                            await updateProduct(req, res);
+                        } catch (error) {
+                            console.error('Error in JSON PUT handler:', error);
+                            res.status(500).json({ error: 'Internal server error' });
+                        }
+                    });
+                } else {
+                    // Handle file upload for product update
+                    handleFileUpload(req, res, async () => {
+                        try {
+                            console.log('Processing form-data PUT request with data:', req.body);
+                            console.log('Uploaded file:', req.file);
+                            await updateProduct(req, res);
+                        } catch (error) {
+                            console.error('Error in form-data PUT handler:', error);
+                            res.status(500).json({ error: 'Internal server error' });
+                        }
+                    });
+                }
+                break;
+            case 'DELETE':
+                // Delete product
+                await deleteProduct(req, res);
+                break;
+            default:
+                res.status(405).json({ error: 'Method not allowed' });
         }
     } catch (error) {
         console.error('Unexpected error in products API:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-};
+}
 
 async function getProducts(req, res) {
     try {

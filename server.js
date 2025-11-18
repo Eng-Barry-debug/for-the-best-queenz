@@ -4,7 +4,12 @@ import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
 import { promises as fs } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import { v4 as uuidv4 } from 'uuid';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // For serverless environments
 const isProduction = process.env.NODE_ENV === 'production';
@@ -102,11 +107,26 @@ app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'ok', environment: process.env.NODE_ENV || 'development' });
 });
 
-// API routes
-app.all('/api/products/:id?', require('./api/products.js'));
-app.all('/api/categories/:id?', require('./api/categories.js'));
-app.all('/api/contacts/:id?', require('./api/contacts.js'));
-app.all('/api/orders/:id?', require('./api/orders.js'));
+// API routes with dynamic imports
+app.all('/api/products/:id?', async (req, res, next) => {
+    const { default: router } = await import('./api/products.js');
+    return router(req, res, next);
+});
+
+app.all('/api/categories/:id?', async (req, res, next) => {
+    const { default: router } = await import('./api/categories.js');
+    return router(req, res, next);
+});
+
+app.all('/api/contacts/:id?', async (req, res, next) => {
+    const { default: router } = await import('./api/contacts.js');
+    return router(req, res, next);
+});
+
+app.all('/api/orders/:id?', async (req, res, next) => {
+    const { default: router } = await import('./api/orders.js');
+    return router(req, res, next);
+});
 
 // Catch-all handler: send back index.html for any non-API routes
 app.get('*', (req, res) => {
@@ -121,4 +141,4 @@ if (!isVercel) {
 }
 
 // Export the Express API for Vercel
-module.exports = app;
+export default app;
